@@ -1,0 +1,30 @@
+Project Plan
+
+- What data do I want to display to the user for each month?
+    * Total amount spent
+    * Total amount earned
+    * How much was spent in each category (percentage)
+
+- What data do I want to display to the user for each year?
+    * Total amount spent
+    * Total amount earned
+    * Average monthly spending
+    * Average monthly earning
+    * How much was spent in each category (percentage)
+
+
+Missing Functionality
+
+- Function that takes a purchase description and returns a category if found, otherwise 
+  will label the purchase as "other"
+
+- Find a way to organize data into each month/year
+    * This could be done using object orientation where each month is a object
+    * same thing could be done for yearly data
+
+- Find a way to store data in a small database 
+    * Update this database whenever a new file is uploaded
+
+- Need to be able to upload a file 
+
+

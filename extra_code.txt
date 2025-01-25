@@ -1,0 +1,48 @@
+These are peices of code that are no longer in use (saved here just in case they are needed for testing)
+-------------------------------------------
+
+def display_data(self):
+        print (f"Year: {self.year}")
+        print (f"Total Spent: {self.total_spent}")
+        print (f"Total Earned: {self.total_earned}")
+        print (f"Average Monthly Spending: {self.average_spending}")
+        print (f"Average Monthly Earnings: {self.average_earning}")
+
+-------------------------------------------
+
+print ("Purchases (" + str(len(purchases)) + "):")
+for i in purchases:
+    total_spent += i.amount
+    print(f"{i.date} {i.label} {i.amount}")
+print ("Deposits (" + str(len(deposits)) + "):")
+for i in deposits:
+    total_earned += i.amount
+    print(f"{i.date} {i.amount}")
+
+------------------------------------------
+
+with open('database.json', 'r') as file:
+    data = json.load(file)
+user_data = AllData()
+user_data.load_data(data)
+year_data = YearData(2024)
+year_data.load_dict(data)
+pdf_path = "C:\\Users\\aldoc\\Documents\\Personal\\Projects\\Spending Analysis Project\\Bank Statements\\09-25-24 WellsFargo.pdf"
+text = extract_text_from_pdf(pdf_path)
+purchases = []
+deposits = []
+years = []
+
+for i in text:
+    if "Purchase" in i or "Zelle to" in i or "Money Transfer" in i or "Withdraw" in i:
+        purchases.append(extract_purchase(i))
+    else:
+        deposits.append(extract_deposit(i))
+
+year_data.add_purchases(purchases)
+year_data.add_deposits(deposits)
+# year_data.display_data()
+ 
+
+with open("database.json", "w") as file:
+    json.dump(year_data.to_dict(), file, indent=4)
