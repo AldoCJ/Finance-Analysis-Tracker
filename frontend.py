@@ -27,7 +27,28 @@ class FinanceTrackerGUI:
         self.build_dashboard(self.dashboard_frame)
         self.build_categorization(self.categorization_frame)
 
+        try:
+            if hasattr(self, "year_dropdown") and self.year_dropdown['values']:
+                if not self.year_var.get():
+                    self.year_dropdown.current(0)
+            if hasattr(self, "month_dropdown") and self.month_dropdown['values']:
+                if not self.month_var.get():
+                    self.month_dropdown.current(0)
+
+            # Only call update if year value is usable (int)
+            if self.year_var.get():
+                try:
+                    # update display for the initially selected year/month
+                    self.update_yearly_data(self.year_var.get())
+                    self.update_monthly_data(self.year_var.get(), self.month_var.get())
+                except Exception as e:
+                    print(f"Initial dashboard update error: {e}")
+        except Exception as e:
+            print(f"Error initializing dashboard selections: {e}")
+
+
         self.show_dashboard()
+
 
     # ---------------- Dashboard ----------------
     def build_dashboard(self, parent):
